@@ -10,8 +10,17 @@ import com.google.gson.Gson;
 
 public class CurrencyService {
 
-  public CurrencyDTO getCurrencyData() {
+  private final CurrencyDTO currencyDTO;
 
+  public CurrencyService() {
+    this.currencyDTO = storeCurrencyData();
+  }
+
+  public CurrencyDTO getCurrencyData() {
+    return currencyDTO;
+  }
+
+  private CurrencyDTO storeCurrencyData() {
     String uri = "https://v6.exchangerate-api.com/v6/8fa6e88728197c9cf3098192/latest/USD";
 
     try {
@@ -28,8 +37,6 @@ public class CurrencyService {
   }
 
   public List<CurrencyModel> getCurrencyList() {
-    CurrencyDTO currencyDTO = getCurrencyData();
-
     return currencyDTO.conversionRates().entrySet().stream()
         .map(currency -> new CurrencyModel(currency.getKey(), currency.getValue()))
         .toList();

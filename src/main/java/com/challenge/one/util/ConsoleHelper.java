@@ -18,8 +18,26 @@ public class ConsoleHelper {
     System.out.println(message);
   }
 
-  public static void printMenu(List<String> options) {
+  public static void printMenuList(List<String> currencyList) {
 
+    int col = 3;
+    int row = (int) Math.ceil(currencyList.size() / (double) col);
+    int maxTextLen = currencyList.stream()
+        .mapToInt(String::length)
+        .max()
+        .orElse(20);
+    int cellWidth = maxTextLen + 4;
+
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
+        int index = i * col + j;
+        if (index < currencyList.size()) {
+          // System.out.print(index + " - " + currencyList.get(index) + "\t");
+          System.out.printf("%3d) %-" + cellWidth + "s", index, currencyList.get(index));
+        }
+      }
+      System.out.println();
+    }
   }
 
   public static BigDecimal getInput() {
