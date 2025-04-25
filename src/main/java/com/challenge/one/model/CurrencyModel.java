@@ -4,13 +4,15 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 public class CurrencyModel {
+  private int id;
   private String code;
   private String name;
   private String symbol;
   private String country;
   private BigDecimal value;
 
-  public CurrencyModel(String code, BigDecimal value) {
+  public CurrencyModel(int id, String code, BigDecimal value) {
+    this.id = id;
     this.code = code;
     this.value = value;
     this.name = resolveName(code);
@@ -31,6 +33,10 @@ public class CurrencyModel {
     } catch (IllegalArgumentException e) {
       return code;
     }
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getCode() {

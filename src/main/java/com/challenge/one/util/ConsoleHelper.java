@@ -1,47 +1,61 @@
 package com.challenge.one.util;
 
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class ConsoleHelper {
+import com.challenge.one.model.CurrencyModel;
 
-  private static final Scanner scanner = new Scanner(System.in);
+public final class ConsoleHelper {
 
-  public static void printTitle(String title) {
+  private final ResourceBundle messages;
+
+  public ConsoleHelper() {
+    this.messages = LocalizationHelper.getMessages();
+  }
+
+  private final Scanner scanner = new Scanner(System.in);
+
+  public void printTitle() {
     System.out.println("========================================");
-    System.out.println(title);
+    System.out.println(getMessage("menu.title"));
     System.out.println("========================================");
   }
 
-  public static void printMessage(String message) {
-    System.out.println(message);
+  public String getMessage(String key) {
+    return messages.getString(key);
   }
 
-  public static void printMenuList(List<String> currencyList) {
+  // Método para mensagens com parâmetros
+  public String getMessage(String key, Object... args) {
+    return MessageFormat.format(messages.getString(key), args);
+  }
+
+  public void printMenuList(List<CurrencyModel> currencyList) {
 
     int col = 3;
     int row = (int) Math.ceil(currencyList.size() / (double) col);
     int maxTextLen = currencyList.stream()
-        .mapToInt(String::length)
+        .mapToInt(currency -> currency.getName().length() + currency.getCode().length() + 4)
         .max()
         .orElse(20);
-    int cellWidth = maxTextLen + 4;
 
     for (int i = 0; i < row; i++) {
       for (int j = 0; j < col; j++) {
         int index = i * col + j;
         if (index < currencyList.size()) {
-          // System.out.print(index + " - " + currencyList.get(index) + "\t");
-          System.out.printf("%3d) %-" + cellWidth + "s", index, currencyList.get(index));
+          CurrencyModel currency = currencyList.get(index);
+          System.out.printf("%3d) %-" + maxTextLen + "s", currency.getId(), currency.getCode() + " - "
+              + currency.getName());
         }
       }
       System.out.println();
     }
   }
 
-  public static BigDecimal getInput() {
-
+  public BigDecimal getInputValue() {
     while (true) {
       try {
         String input = scanner.nextLine().trim().replace(',', '.');
@@ -52,7 +66,18 @@ public class ConsoleHelper {
     }
   }
 
-  public static void close() {
+  public int getInputId() {
+    while (true) {
+      try {
+        int input = scanner.nextInt();
+        return input;
+      } catch (NumberFormatException e) {
+        System.out.println(e.getMessage());
+      }
+    }
+  }
+
+  public void close() {
     scanner.close();
   }
 }

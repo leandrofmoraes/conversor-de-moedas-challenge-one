@@ -1,6 +1,8 @@
-com/challenge/one/model/CurrencyModel.class
 com/challenge/one/client/CurrencyApiClient.class
 com/challenge/one/service/CurrencyService.class
 com/challenge/one/util/ConsoleHelper.class
 com/challenge/one/App.class
+com/challenge/one/model/CurrencyModel.class
+com/challenge/one/repository/CurrencyRepository.class
+com/challenge/one/util/LocalizationHelper.class
 com/challenge/one/dto/CurrencyDTO.class

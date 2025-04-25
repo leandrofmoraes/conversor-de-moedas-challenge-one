@@ -20,18 +20,19 @@ public class CurrencyApiClient {
    * Constructor that initializes the HttpClient and sets the default URI for the
    * API.
    */
-  public CurrencyApiClient() {
-    // Creates a client with default settings
-    // HttpClient httpClient = HttpClient.newHttpClient();
-
-    // Creates a client with custom settings
-    this.httpClient = HttpClient.newBuilder()
-        .version(HttpClient.Version.HTTP_2)
-        .build();
-
-    // Uses a default URI
-    this.uriString = "https://v6.exchangerate-api.com/v6/8fa6e88728197c9cf3098192/latest/USD";
-  }
+  // public CurrencyApiClient() {
+  // // Creates a client with default settings
+  // // HttpClient httpClient = HttpClient.newHttpClient();
+  //
+  // // Creates a client with custom settings
+  // this.httpClient = HttpClient.newBuilder()
+  // .version(HttpClient.Version.HTTP_2)
+  // .build();
+  //
+  // // Uses a default URI
+  // this.uriString =
+  // "https://v6.exchangerate-api.com/v6/8fa6e88728197c9cf3098192/latest/USD";
+  // }
 
   public CurrencyApiClient(String uri) {
     this.httpClient = HttpClient.newBuilder()
