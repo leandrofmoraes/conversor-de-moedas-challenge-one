@@ -44,17 +44,17 @@ public class CurrencyService {
     return currencyRepository.getAllCurrencies();
   }
 
-  public CurrencyModel getCurrencyByCode(String code) {
+  public CurrencyModel findCurrency(String code) {
     return currencyRepository.getCurrencyByCode(code);
   }
 
-  public CurrencyModel getCurrencyById(int id) {
+  public CurrencyModel findCurrency(int id) {
     return currencyRepository.getCurrencyById(id);
   }
 
   public BigDecimal convertCurrency(String fromCurrency, String toCurrency, BigDecimal amount) {
-    CurrencyModel from = getCurrencyByCode(fromCurrency);
-    CurrencyModel to = getCurrencyByCode(toCurrency);
+    CurrencyModel from = findCurrency(fromCurrency);
+    CurrencyModel to = findCurrency(toCurrency);
 
     if (from == null || to == null) {
       throw new IllegalArgumentException("Invalid currency code");

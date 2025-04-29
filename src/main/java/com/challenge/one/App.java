@@ -1,45 +1,24 @@
 package com.challenge.one;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import com.challenge.one.model.CurrencyModel;
-import com.challenge.one.service.CurrencyService;
-import com.challenge.one.util.ConsoleHelper;
+import com.challenge.one.controller.ModeController;
 
 public class App {
   public static void main(String[] args) {
 
-    CurrencyService currencyService = new CurrencyService();
-    List<CurrencyModel> currencies = currencyService.getList();
-    ConsoleHelper consoleHelper = new ConsoleHelper();
+    ModeController controller = new ModeController();
 
-    String lastUpdate = currencyService.getLastCurrencyQuoteUpdate();
-    consoleHelper.printTitle();
-
-    if (currencies != null) {
-      System.out.println("Last Update: " + lastUpdate);
-      consoleHelper.printMenuList(currencies);
-
-      System.out.print(consoleHelper.getMessage("from.currency.select") + " ");
-      int inputFromIndex = consoleHelper.getInputId();
-      CurrencyModel selectedCurrencyFrom = currencyService.getCurrencyById(inputFromIndex);
-
-      System.out.print(consoleHelper.getMessage("get.currency.value") + " ");
-      BigDecimal inputValue = consoleHelper.getInputValue();
-
-      System.out.print(consoleHelper.getMessage("to.currency.select") + " ");
-      int inputToIndex = consoleHelper.getInputId();
-      CurrencyModel selectedCurrencyTo = currencyService.getCurrencyById(inputToIndex);
-
-      BigDecimal convertedValue = currencyService.convertCurrency(
-          selectedCurrencyFrom.getCode(), selectedCurrencyTo.getCode(), inputValue);
-
-      System.out.println(consoleHelper.getMessage("conversion.result",
-          selectedCurrencyFrom.getName(), selectedCurrencyFrom.getSymbol(), inputValue,
-          selectedCurrencyTo.getName(), selectedCurrencyTo.getSymbol(), convertedValue));
+    if (args.length == 0) {
+      controller.interactiveMode();
+    } else if (args.length == 1) {
+      controller.handleSingleArgument(args[0]);
+    } else if (args.length == 3) {
+      String value = args[2].trim().replace(',', '.');
+      controller.imperativeMode(args[0], args[1], new BigDecimal(value));
     } else {
-      System.out.println("Failed to retrieve currency data.");
+      throw new IllegalArgumentException("Invalid number of arguments. Expected 0, 1 or 3 arguments.");
     }
+
   }
 }

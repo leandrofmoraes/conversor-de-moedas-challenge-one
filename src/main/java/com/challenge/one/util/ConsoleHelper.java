@@ -11,17 +11,22 @@ import com.challenge.one.model.CurrencyModel;
 public final class ConsoleHelper {
 
   private final ResourceBundle messages;
+  private final Scanner scanner;
 
   public ConsoleHelper() {
     this.messages = LocalizationHelper.getMessages();
+    this.scanner = new Scanner(System.in);
+    this.scanner.useLocale(LocalizationHelper.getLocale());
   }
 
-  private final Scanner scanner = new Scanner(System.in);
-
   public void printTitle() {
-    System.out.println("========================================");
-    System.out.println(getMessage("menu.title"));
-    System.out.println("========================================");
+    String line = "======================================================";
+    String title = getMessage("menu.title");
+    int space = (line.length() - title.length()) / 2;
+
+    System.out.printf("%s%n", line);
+    System.out.printf("%-" + space + "s%n", title);
+    System.out.printf("%s%n%n", line);
   }
 
   public String getMessage(String key) {
@@ -58,7 +63,8 @@ public final class ConsoleHelper {
   public BigDecimal getInputValue() {
     while (true) {
       try {
-        String input = scanner.nextLine().trim().replace(',', '.');
+        System.out.print(getMessage("get.currency.value") + " ");
+        String input = scanner.next().trim().replace(',', '.');
         return new BigDecimal(input);
       } catch (NumberFormatException e) {
         System.out.println(e.getMessage());
@@ -66,10 +72,11 @@ public final class ConsoleHelper {
     }
   }
 
-  public int getInputId() {
+  public String getInput(String message) {
     while (true) {
       try {
-        int input = scanner.nextInt();
+        System.out.print(getMessage(message) + " ");
+        String input = scanner.next();
         return input;
       } catch (NumberFormatException e) {
         System.out.println(e.getMessage());
@@ -77,7 +84,39 @@ public final class ConsoleHelper {
     }
   }
 
-  public void close() {
+  public void closeScanner() {
     scanner.close();
+  }
+
+  public void printHelp() {
+    String helpText = MessageFormat.format("""
+        {0}
+        {1}
+        {2}
+
+        {3}
+
+        {4}
+
+        {5}
+
+        {6}
+        {7}
+        {8}
+
+        {9}
+        """,
+        messages.getString("help.title"),
+        messages.getString("help.usage"),
+        messages.getString("help.pattern"),
+        messages.getString("help.params"),
+        messages.getString("help.options"),
+        messages.getString("help.interactive"),
+        messages.getString("help.examples"),
+        messages.getString("help.example_code"),
+        messages.getString("help.example_index"),
+        messages.getString("help.notes"));
+
+    System.out.println(helpText);
   }
 }
