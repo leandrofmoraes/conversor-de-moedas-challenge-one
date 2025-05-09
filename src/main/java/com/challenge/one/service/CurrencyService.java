@@ -3,9 +3,15 @@ package com.challenge.one.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.challenge.one.client.CurrencyApiClient;
+import com.challenge.one.config.ConfigLoader;
+import com.challenge.one.dto.ConversionDTO;
 import com.challenge.one.dto.CurrencyDTO;
 import com.challenge.one.model.CurrencyModel;
 import com.challenge.one.repository.CurrencyRepository;
@@ -14,6 +20,7 @@ import com.google.gson.Gson;
 public class CurrencyService {
 
   private final CurrencyRepository currencyRepository;
+  private static final Logger log = LoggerFactory.getLogger(CurrencyService.class);
 
   public CurrencyService() {
     CurrencyDTO currencyDTO = getCurrencyDataFromAPI();
@@ -21,10 +28,10 @@ public class CurrencyService {
   }
 
   private CurrencyDTO getCurrencyDataFromAPI() {
-    String uri = "https://v6.exchangerate-api.com/v6/8fa6e88728197c9cf3098192/latest/USD";
 
     try {
-      String currencyData = new CurrencyApiClient(uri).getAPIData();
+      String apiUrl = ConfigLoader.getApiUrl();
+      String currencyData = new CurrencyApiClient(apiUrl).getAPIData();
       CurrencyDTO currencyDTO = new Gson().fromJson(currencyData, CurrencyDTO.class);
 
       return currencyDTO;
@@ -45,11 +52,21 @@ public class CurrencyService {
   }
 
   public CurrencyModel findCurrency(String code) {
-    return currencyRepository.getCurrencyByCode(code);
+    CurrencyModel currency = currencyRepository.getCurrencyByCode(code);
+    if (currency != null) {
+      return currency;
+    } else {
+      throw new IllegalArgumentException("Invalid currency code");
+    }
   }
 
   public CurrencyModel findCurrency(int id) {
-    return currencyRepository.getCurrencyById(id);
+    CurrencyModel currency = currencyRepository.getCurrencyById(id);
+    if (currency != null) {
+      return currency;
+    } else {
+      throw new IllegalArgumentException("Invalid currency id");
+    }
   }
 
   public BigDecimal convertCurrency(String fromCurrency, String toCurrency, BigDecimal amount) {
@@ -60,7 +77,27 @@ public class CurrencyService {
       throw new IllegalArgumentException("Invalid currency code");
     }
 
-    BigDecimal conversionRate = to.getValue().divide(from.getValue(), 2, RoundingMode.HALF_UP);
-    return amount.multiply(conversionRate);
+    BigDecimal fromValue = from.getValue();
+    BigDecimal toValue = to.getValue();
+
+    BigDecimal conversionRate = toValue.divide(fromValue, 2, RoundingMode.HALF_UP);
+    BigDecimal conversionResult = amount.multiply(conversionRate);
+
+    String logMessage = String.format(
+        "[CONVERSION] %s → %s | Value: %.2f | Result: %.2f",
+        fromValue, toValue, amount, conversionResult);
+
+    // Save conversion history
+    new HistoryService().saveHistory(new ConversionDTO(
+        LocalDateTime.now().toString(),
+        fromCurrency,
+        toCurrency,
+        amount,
+        conversionResult));
+
+    // Log the conversion
+    log.info(logMessage);
+
+    return conversionResult;
   }
 }

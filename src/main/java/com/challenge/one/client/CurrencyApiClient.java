@@ -14,7 +14,7 @@ import java.time.Duration;
 public class CurrencyApiClient {
 
   private final HttpClient httpClient;
-  private final String uriString;
+  private final String apiUrl;
 
   /*
    * Constructor that initializes the HttpClient and sets the default URI for the
@@ -39,7 +39,7 @@ public class CurrencyApiClient {
         .version(HttpClient.Version.HTTP_2)
         .connectTimeout(Duration.ofSeconds(15))
         .build();
-    this.uriString = uri;
+    this.apiUrl = uri;
   }
 
   /*
@@ -50,7 +50,7 @@ public class CurrencyApiClient {
 
     HttpRequest request = HttpRequest.newBuilder()
         .GET()
-        .uri(URI.create(uriString))
+        .uri(URI.create(apiUrl))
         .header("accept", "application/json")
         .timeout(Duration.ofSeconds(10))
         .build();

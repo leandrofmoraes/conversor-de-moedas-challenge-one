@@ -11,7 +11,7 @@ public class LocalizationHelper {
     // Locale systemLocale = Locale.US;
     // Locale systemLocale = Locale.of("es", "AR");
     systemLocale = Locale.getDefault();
-    messages = ResourceBundle.getBundle("MessagesBundle", systemLocale);
+    messages = ResourceBundle.getBundle("messages", systemLocale);
   }
 
   public static ResourceBundle getMessages() {

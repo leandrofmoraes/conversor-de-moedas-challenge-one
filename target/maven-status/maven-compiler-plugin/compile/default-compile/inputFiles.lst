@@ -4,6 +4,9 @@
 /run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/App.java
 /run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/dto/CurrencyDTO.java
 /run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/service/CurrencyService.java
+/run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/config/ConfigLoader.java
 /run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/client/CurrencyApiClient.java
 /run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/util/ConsoleHelper.java
 /run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/repository/CurrencyRepository.java
+/run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/dto/ConversionDTO.java
+/run/media/leandro-f/Arquivos/Estudo/Informatica/Java/Oracle Next Education/conversor-moedas/src/main/java/com/challenge/one/service/HistoryService.java

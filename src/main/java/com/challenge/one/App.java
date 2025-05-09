@@ -9,16 +9,15 @@ public class App {
 
     ModeController controller = new ModeController();
 
-    if (args.length == 0) {
-      controller.interactiveMode();
-    } else if (args.length == 1) {
-      controller.handleSingleArgument(args[0]);
-    } else if (args.length == 3) {
-      String value = args[2].trim().replace(',', '.');
-      controller.imperativeMode(args[0], args[1], new BigDecimal(value));
-    } else {
-      throw new IllegalArgumentException("Invalid number of arguments. Expected 0, 1 or 3 arguments.");
+    switch (args.length) {
+      case 0 -> controller.interactiveMode();
+      case 1 -> controller.handleSingleArgument(args[0]);
+      case 3 -> {
+        String value = args[2].trim().replace(',', '.');
+        controller.commandLineMode(args[0], args[1], new BigDecimal(value));
+      }
+      default ->
+        throw new IllegalArgumentException("Invalid number of arguments. Expected 0, 1 or 3 arguments.");
     }
-
   }
 }
