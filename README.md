@@ -1,6 +1,7 @@
 # Conversor de Moedas
 
 Uma aplicação Java, via console para conversão monetária com integração em tempo real a uma API de câmbio.
+O projeto foi desenvolvido como parte do desafio de programação, promovido pela escola de Tecnologia [Alura](https://www.alura.com.br) em parceria com a [Oracle Next Education (ONE)](https://www.oracle.com/br/education/oracle-next-education), com objetivo de demonstrar habilidades em Java.
 
 ## Features
 
@@ -87,7 +88,7 @@ Executa o menu passo-a-passo:
 java -jar conversor-moedas.jar
 ```
 
-![Menu Interativo](https://github.com/leandrofmoraes/conversor-de-moedas/blob/master/screenshots/assets/Screenshot_10-mai.png)
+![Menu Interativo](https://github.com/leandrofmoraes/conversor-de-moedas-challenge-one/blob/master/assets/Screenshot_10-mai.png)
 
 ### Modo Rápido (Linha de comando)
 
