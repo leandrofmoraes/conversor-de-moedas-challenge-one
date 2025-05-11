@@ -37,7 +37,7 @@ Este projeto consome dados de câmbio da API ExchangeRate, para usar é necessá
 
 ### Download Direto (Para Usuários Finais)
 
-1. Baixe o JAR executável: [Conversor de Moedas]()
+1. Baixe o JAR executável em [releases](https://github.com/leandrofmoraes/conversor-de-moedas-challenge-one/releases)
 
 2. Execute:
    ```bash
@@ -88,7 +88,7 @@ Executa o menu passo-a-passo:
 java -jar conversor-moedas.jar
 ```
 
-![Menu Interativo](https://github.com/leandrofmoraes/conversor-de-moedas-challenge-one/blob/master/assets/Screenshot_10-mai.png)
+![img](https://github.com/leandrofmoraes/conversor-de-moedas-challenge-one/blob/master/assets/Screenshot_10-mai.png)
 
 ### Modo Rápido (Linha de comando)
 
