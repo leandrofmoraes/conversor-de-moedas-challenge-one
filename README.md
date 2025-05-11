@@ -1,6 +1,6 @@
 # Conversor de Moedas
 
-Uma aplicação Java, via console para conversão monetária com integração em tempo real a uma API de câmbio.
+Uma aplicação Java, via console para conversão monetária com integração em tempo real com uma API de câmbio.
 O projeto foi desenvolvido como parte do desafio de programação, promovido pela escola de Tecnologia [Alura](https://www.alura.com.br) em parceria com a [Oracle Next Education (ONE)](https://www.oracle.com/br/education/oracle-next-education), com objetivo de demonstrar habilidades em Java.
 
 ## Features
