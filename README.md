@@ -5,11 +5,11 @@ O projeto foi desenvolvido como parte do desafio de programação, promovido pel
 
 ## Features
 
-- Conversão dinâmica de moedas via API em tempo real
+- Conversão dinâmica de moedas
 - Listagem de moedas em colunas
 - Dois modos de operação:
   - **Interativo**: Menu com navegação passo-a-passo
-  - **Rápico**: Linha de comando, com passagem de argumentos.
+  - **Rápido**: Linha de comando, com passagem de argumentos.
 - Suporte a múltiplos idiomas (i18n): PT-BR, EN, ES
 - Geração de logs em arquivo
 - Histórico de conversões em arquivos no formato JSON
@@ -17,12 +17,12 @@ O projeto foi desenvolvido como parte do desafio de programação, promovido pel
 ## Requisitos
 
 - Java 17+ (JDK ou JRE)
-- Maven 3.9+ (para build e profiles)
+- Maven 3.9+ (para build e gerênciamento de dependências)
 - Chave de API válida do [ExchangeRate-API](https://www.exchangerate-api.com/)
 
 ## Configuração e obtenção da API Key
 
-Este projeto consome dados de câmbio da API ExchangeRate, para usar é necessário obter sua própria chave:
+**Este projeto consome dados de câmbio da API ExchangeRate, para usar é necessário obter sua própria chave**:
 
 - Acesse [ExchangeRate-API](https://www.exchangerate-api.com/)
 - Registre-se gratuitamente
