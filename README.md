@@ -31,9 +31,17 @@ O projeto foi desenvolvido como parte do desafio de programação, promovido pel
 ## Instalação
 
 1. Exporte sua chave:
-   ```bash
-   export API_KEY=SUA_CHAVE_PROD
-   ```
+   (no Linux, Mac ou WSL)
+
+```bash
+export API_KEY=SUA_CHAVE_PROD
+```
+
+(no Windows)
+
+```bash
+set API_KEY=SUA_CHAVE_PROD
+```
 
 ### Download Direto (Para Usuários Finais)
 
@@ -120,23 +128,23 @@ java -jar conversor-moedas.jar --help
 
 ## Logs
 
-Logs de nível INFO+ são salvos em logs/conversor.log
-
-```json
-{
-  "timestamp": "2024-01-01T12:00:00",
-  "from": "USD",
-  "to": "BRL",
-  "amount": 100.0,
-  "result": 490.5
-}
-```
+Logs de nível INFO+ são salvos em `./logs/conversor.log`
 
 ## Histórico de Conversões
 
-- Cada conversão é registrada no formato json no diretório do usuário em `~/.conversor-moedas/history.json`.
+- Cada conversão é registrada no formato json no diretório do usuário em `.conversor-moedas/history.json`.
 - O histórico mantém até 50 registros mais recentes.
 - No modo interativo, selecione Exibir histórico para ver as últimas conversões.
+
+```json
+{
+  "timestamp": "2025-05-07T15:43:45.152101448",
+  "fromCurrency": "USD",
+  "toCurrency": "BRL",
+  "amount": 1,
+  "result": 5.70
+},
+```
 
 ## Idiomas Suportados
 
